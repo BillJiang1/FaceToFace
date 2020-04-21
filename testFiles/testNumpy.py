@@ -1,9 +1,10 @@
 import tensorflow as tf
+import numpy as np
 
-A = tf.constant([[1., 2.], [3., 4.]])
-print(type(A))
-print(A.numpy())
-print('Is GPU available:')
-print(tf.test.is_gpu_available())
-print('Is the Tensor on gpu #0:')
-print(A.device)
+init = np.array()
+a = np.array([[1,2],[2,3]])
+b = np.array([[4,5],[5,6]])
+c = np.array([[6,7],[7,8]])
+
+d = np.vstack((a,b,c))
+print(d)

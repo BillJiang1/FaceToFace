@@ -4,7 +4,8 @@ import tensorflow as tf
 import numpy as np
 import cv2
 
-
+checkpoints_save_path_1 = 'SaveTest/PhoebeSave'
+checkpoints_save_path_2 = 'SaveTest/AnneSave'
 # 用于图像扭曲
 # class upScale(tf.keras.layers.Layer):
 #     def __init__(self, output_features):
@@ -169,37 +170,33 @@ class FaceAutoEncoder:
     def save_model(self):
         checkpoint_init = tf.train.Checkpoint(model=self.autoencoder_init)
         checkpoint_target = tf.train.Checkpoint(model=self.autoencoder_target)
-        checkpoint_init.save("Save1/PhoebeSave/model.ckpt")
-        checkpoint_target.save("Save1/AnneSave/model.ckpt")
+        checkpoint_init.save(checkpoints_save_path_1+"/model.ckpt")
+        checkpoint_target.save(checkpoints_save_path_2+"/model.ckpt")
 
     def restore_model(self):
         checkpoint_init = tf.train.Checkpoint(model=self.autoencoder_init)
         checkpoint_target = tf.train.Checkpoint(model=self.autoencoder_target)
-        checkpoint_init.restore(tf.train.latest_checkpoint('Save1/PhoebeSave'))
-        checkpoint_target.restore(tf.train.latest_checkpoint('Save1/AnneSave'))
+        checkpoint_init.restore(tf.train.latest_checkpoint(checkpoints_save_path_1))
+        checkpoint_target.restore(tf.train.latest_checkpoint(checkpoints_save_path_2))
 
 
 if __name__ == '__main__':
-
+    def showImg(y):
+        output_img = y.numpy()
+        output_img = np.reshape(output_img, (64, 64, 3))
+        cv2.imshow("output_img",output_img)
+        cv2.waitKey()
     model = FaceAutoEncoder()
     model.restore_model()
-    img = cv2.imread('face/face1.jpg')
-
+    img = cv2.imread('actorMenu/Phoebe.jpg')
     img1 = cv2.imread('face/face2.jpg')
-    cv2.imshow("img_out", img1)
     img = cv2.resize(img,(64,64))
     img = tf.reshape(img, (-1,64, 64, 3))
     img = tf.divide(img, 255)
     img1 = tf.reshape(img1, (-1,64, 64, 3))
     img1 = tf.divide(img1, 255)
-    y = model.autoencoder_target(img)
+    y = model.autoencoder_init(img)
     y1 = model.autoencoder_target(img1)
-    output_img = y.numpy()
-    output_img = np.reshape(output_img, (64, 64, 3))
-    output_img1 = y1.numpy()
-    output_img1 = np.reshape(output_img1, (64, 64, 3))
-    print('img', img)
-    print('y:', y)
-    print('y1', y1)
-    cv2.imshow("img_out1", output_img1)
+    showImg(y)
+    showImg(y1)
     cv2.waitKey()

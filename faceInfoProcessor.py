@@ -43,4 +43,4 @@ def jsonGenerate(jsonPath):
 
 if __name__ == '__main__':
     # jsonGenerate(jsonPath)
-    print(jsonResolve(jsonPath, 'image-014.jpg'))
+
