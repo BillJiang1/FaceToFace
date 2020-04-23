@@ -13,6 +13,7 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="dlib.*" />
+          <option value="testPythonClass" />
         </list>
       </option>
     </inspection_tool>

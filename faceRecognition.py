@@ -31,7 +31,7 @@ def get_menu_descriptors():
         # img = io.imread(os.path.join(menu_path, filename))
         # img = dlib.load_rgb_image(filename)
         dets = face_detector(img, 1)
-        print("Number of face detected:{}".format(len(dets)))
+        print("Number of targetFaces detected:{}".format(len(dets)))
 
         for i, d in enumerate(dets):
             # 计算关键特征点
@@ -54,7 +54,7 @@ def face_recognition(img_file, target_character):
     dets = face_detector(img, 1)
     # 使用基于CNN的人脸识别模型
     # dets = cnn_face_detector(img,1)
-    print("Number of face detected : {}".format(len(dets)))
+    print("Number of targetFaces detected : {}".format(len(dets)))
     top = bottom = left = right = -1
     for i, d in enumerate(dets):
         dist = []
@@ -70,7 +70,7 @@ def face_recognition(img_file, target_character):
         c_d = zip(known_names, dist)
         cd_sorted = sorted(c_d, key=lambda x: x[1])
         # 使用切片裁剪人脸
-        # face = img[d.top():d.bottom(), d.left():d.right()]
+        # targetFaces = img[d.top():d.bottom(), d.left():d.right()]
 
         # 设置人脸检测阈值，即误差小于0.6时才可确定目标身份
         if cd_sorted[0][1] <= 0.65:
@@ -113,16 +113,16 @@ def procurstes_analysis(points1, points2):
 # M为仿射变换矩阵，用于将img进行校准
 def face_aligment(img, M, x, y):
     img_new = cv2.warpAffine(img, M, (y, x))
-
+    return img_new
 
 if __name__ == '__main__':
-    imgfile = "VideoSnapshot/image-004.jpg"
-    if os.listdir("actorDescriptor"):
-        for root, dirs, files in os.walk("actorDescriptor"):
-            for f in files:
-                descriptor_array = np.load(os.path.join("actorDescriptor", f))
-                descriptors.append(descriptor_array)
-    else:
-        get_menu_descriptors()
+    imgfile = "videoSnapshot/image-004.jpg"
+    # if os.listdir("actorDescriptor"):
+    #     for root, dirs, files in os.walk("actorDescriptor"):
+    #         for f in files:
+    #             descriptor_array = np.load(os.path.join("actorDescriptor", f))
+    #             descriptors.append(descriptor_array)
+    # else:
+    #     get_menu_descriptors()
     # get_menu_descriptors()
     face_recognition(imgfile, 'Phoebe')

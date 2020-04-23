@@ -1,10 +1,17 @@
-import tensorflow as tf
-import numpy as np
+# import tensorflow as tf
+# import numpy as np
+#
+# init = np.array()
+# a = np.array([[1,2],[2,3]])
+# b = np.array([[4,5],[5,6]])
+# c = np.array([[6,7],[7,8]])
+#
+# d = np.vstack((a,b,c))
+# print(d)
 
-init = np.array()
-a = np.array([[1,2],[2,3]])
-b = np.array([[4,5],[5,6]])
-c = np.array([[6,7],[7,8]])
+import testPythonClass
 
-d = np.vstack((a,b,c))
-print(d)
+
+testClass = testPythonClass.TestClass
+testClass.AA(1,23,4)
+

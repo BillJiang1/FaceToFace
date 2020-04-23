@@ -60,4 +60,11 @@
 但是对于数据集以外的任何人脸都不具备解析能力。
     构想的解决方法：多样化数据集内容，在数据集中加入其他人脸。
     测试1，在数据集中加入一张Phoebe的人脸标记为init，其他均为Anne的人脸标记为target
+11. 换脸视频步骤在此记录：
+    - 利用videoProcessing.py 将视频分割成帧
+    - 利用faceInfoProcessor.py 读取每一帧，识别要换脸的对象，使用json文件记录目标人脸坐标
+    - 利用captureFace.py与faceInforProcessor.py 的captureFace函数，根据json文件生成指定大小的面部图片（64*64*3）
+    - 运行faceChange.py的save_dataset与load_dataset函数制作数据集ds_init与ds_target
+    - 将数据集传入神经网络进行训练
+12. 训练过程中，init网络在epoch>128时loss突然增大
     

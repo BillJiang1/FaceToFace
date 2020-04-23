@@ -37,7 +37,7 @@ def procrutes_test(points1, points2):
 
 
 if __name__ == '__main__':
-    img_file = "VideoSnapshot/friends-1.jpg"
+    img_file = "videoSnapshot/friends-1.jpg"
     img_file2 = "actorMenu/Joey.jpg"
     img_file3 = "actorMenu/Chandelier.jpg"
     print("Processing file:{}".format(img_file))

@@ -3,7 +3,7 @@ import cv2
 import tensorflow as tf
 import numpy as np
 
-img = cv2.imread('../face/face0.jpg')
+img = cv2.imread('../targetFaces/face0.jpg')
 img = cv2.resize(img,(64,64))
 img = tf.convert_to_tensor(img)
 
